@@ -14,7 +14,7 @@
 	import 'swiper/dist/css/swiper.css'
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	export default {
-	  name: 'Swiper',
+	  name: 'Vue-Swiper',
 	  components: {
 	    swiper,
 	    swiperSlide
@@ -22,7 +22,9 @@
 	  data (){
 	  	return {
 	  		swiperOption: {
-	  			pagination:'.swiper-pagination'
+	  			pagination:'.swiper-pagination',
+	  			loop: true,
+	  			autoplay: 2000
 	  		},
 	  		swiperList: [
 	  			{
@@ -45,7 +47,7 @@
     overflow: hidden
     width: 100%
     height: 0
-    padding-bottom: 31.25%
+    padding-bottom: 26.7%
     background: #eee
   		.swiper-img
   			width: 100% 
