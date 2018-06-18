@@ -100,7 +100,14 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
   .wrapper >>> .swiper-pagination-bullets
     margin-bottom: -.2rem
     @media screen and (min-width: 660px)
-      margin-bottom: 2.8rem
+      margin-bottom: 1rem
+    @media screen and (min-width: 800px)
+      margin-bottom: 3rem
+  .wrapper
+    @media screen and (min-width: 700px)
+      height:8.5rem
+    // @media screen and (min-width: 660px)
+    //   heihht: 6.4rem !important
     .swiper-pagination-bullet
       background: $bgcolor
      	width: 6px 
@@ -120,9 +127,13 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
       float: left
       width: 25%
       height: 0
-      padding-bottom: 25%
+      padding-bottom: 24%
       @media screen and (min-width: 660px)
-      	margin-top: -1.4rem
+        margin-top: -.95rem
+        padding-bottom: 30% 
+      @media screen and (min-width: 800px)
+        padding-bottom: 24%
+        margin-top: -.1.2rem
       .icon-img
         position: absolute
         top: 0
