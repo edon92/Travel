@@ -5,7 +5,7 @@
 				<div class="icons">
 					<div class="icon" v-for="item of page" :key="item.id">
 							<div class="icon-img">
-								<img class="icon-img-content" :src='item.iconUrl'>
+								<img class="icon-img-content" :src='item.imgUrl'>
 							</div>
 							<P class="icon-desc">{{item.desc}}</P>
 					</div>
@@ -20,6 +20,9 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	export default {
 	  name: 'HomeIcon',
+    props: {
+      iconList : Array
+    },
 	  components: {
 	    swiper,
 	    swiperSlide
@@ -28,61 +31,13 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	  	return{
 	  		swiperOption: {
 	  			pagination: '.swiper-pagination'
-
-	  		},
-	  		swiperList: [
-	  			{
-	  				id: '0001',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-	  				desc: '景点门票'
-	  			},
-	  			{
-	  				id: '0002',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/27/dac2bcf9added702.png',
-	  				desc: '丹霞山'
-	  			},
-	  			{
-	  				id: '0003',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/96/c70f1e85ae4a4f02.png',
-	  				desc: '玻璃栈道'
-	  			},
-	  			{
-	  				id: '0004',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/3e/86314b2af03b7502.png',
-	  				desc: '夏日玩水'
-	  			},
-	  			{
-	  				id: '0005',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-	  				desc: '自然风光'
-	  			},
-	  			{
-	  				id: '0006',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/27/dac2bcf9added702.png',
-	  				desc: '水上乐园'
-	  			},
-	  			{
-	  				id: '0007',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/96/c70f1e85ae4a4f02.png',
-	  				desc: '亲子游'
-	  			},
-	  			{
-	  				id: '0008',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/3e/86314b2af03b7502.png',
-	  				desc: '名胜古迹'
-	  			},
-	  			{
-	  				id: '0009',
-	  				iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/27/dac2bcf9added702.png',
-	  				desc: '景点门票'
-	  			}
-	  		]
+	  		}
 	  	}
 	  },
 	  computed: {
 			pages (){
 				const pages = []
-				this.swiperList.forEach((item,index) => {
+				this.iconList.forEach((item,index) => {
 					const page = Math.floor(index/8)
 					if(!pages[page]){
 						pages[page]=[]
