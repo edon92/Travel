@@ -13,47 +13,16 @@
        <div class="area-title">热门城市</div>
        <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">北京</div>
-            <div class="button">北京</div>
-            <div class="button">北京</div>
-            <div class="button">北京</div>
-            <div class="button">北京</div>
-            <div class="button">北京</div>
-            <div class="button">北京</div>
-            <div class="button">北京</div>
+            <div class="button" v-for="item in hotCities">{{item.name}}</div>
           </div>
         </div>
     </div>
-        <div class="city-area">
-          <div class="area-title">A
-          </div>
-          <div class="item-list">
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
+        <div class="city-area" v-for="(val,key) of cities">
+          <div class="area-title">{{key}}</div>
+          <div class="item-list" v-for="item in val">
+            <div class="item border-bottom">{{item.name}}</div>
           </div>
         </div>
-        <div class="city-area">
-          <div class="area-title">A
-          </div>
-          <div class="item-list">
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-            <div class="item border-bottom">阿勒泰</div>
-          </div>
-      </div>
     </div>
   </div>
 </template>
@@ -62,6 +31,10 @@
 import BScroll from 'better-scroll'
 export default {
   name: 'CityList',
+  props: {
+    cities: Object,
+    hotCities: Array
+  },
   mounted (){
     this.scroll = new BScroll(this.$refs.wrapper)
   }
