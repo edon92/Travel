@@ -1,7 +1,18 @@
 <template>
   <div>
     <div class="list">
-      <div class="list-item" v-for="(val,key) of cities">{{key}}</div>
+      <!-- 这里是touchstart，没有大写 -->
+      <div 
+        @click="handleLettersClick" 
+        class="list-item" 
+        v-for="item of letters"
+        @touchstart="handleTouchStart"
+        @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
+        :ref="item"
+        >
+        {{item}}
+      </div>
     </div>  
   </div>
 </template>
@@ -12,10 +23,52 @@ export default {
   name: 'CityAlphabet',
   props: {
     cities: Object
+  },
+  data (){
+    return {
+      touchStatus: false
+    }
+  },
+  methods: {
+    handleLettersClick (e){
+      this.$emit('change',e.target.innerText)
+    },
+    handleTouchStart (){
+      this.touchStatus = true
+    },
+    handleTouchMove (e){
+      if(this.touchStatus){
+        //$refs['A']是一个数组，不是dom。这个数组的第一个才是dom
+        const startY = this.$refs['A'][0].offsetTop,
+              touchY = e.touches[0].clientY -startY - 84,
+              index = Math.floor(touchY/22)
+        const keyDom = this.$refs[this.letters[index]][0]
+        // console.log(this.$refs[this.letters[index]].innerText)
+        // console.log(this.letters[index])
+        if(index >= 0 && index < this.letters.length){
+          //只能绑定在该组件上，
+          // this.$emit('change',this.letters[index])
+          //因为这里出发的事件和上面的change一样功能，所以两次都是一样向外触发change事件
+          this.$emit('change',this.letters[index])
+        }
+      }
+    },
+    handleTouchEnd (){
+      this.touchStatus = false
+    }
+  },
+  computed: {
+    letters (){
+      const letters = []
+      for (var i in this.cities) {
+        letters.push(i)
+      }
+      // 忘记return
+      return letters
+    }
   }
 }
 </script>
-
 <style lang="stylus" scoped>
 @import '~styles/varible.styl'
   .list
