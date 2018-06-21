@@ -26,8 +26,13 @@ export default {
   },
   data (){
     return {
-      touchStatus: false
+      touchStatus: false,
+      startY: '',
+      timer: null
     }
+  },
+  updated (){
+    this.startY = this.$refs['A'][0].offsetTop
   },
   methods: {
     handleLettersClick (e){
@@ -38,19 +43,20 @@ export default {
     },
     handleTouchMove (e){
       if(this.touchStatus){
-        //$refs['A']是一个数组，不是dom。这个数组的第一个才是dom
-        const startY = this.$refs['A'][0].offsetTop,
-              touchY = e.touches[0].clientY -startY - 84,
-              index = Math.floor(touchY/22)
-        const keyDom = this.$refs[this.letters[index]][0]
-        // console.log(this.$refs[this.letters[index]].innerText)
-        // console.log(this.letters[index])
-        if(index >= 0 && index < this.letters.length){
-          //只能绑定在该组件上，
-          // this.$emit('change',this.letters[index])
-          //因为这里出发的事件和上面的change一样功能，所以两次都是一样向外触发change事件
-          this.$emit('change',this.letters[index])
+        if(this.timmer){
+          clearTimeout(this.timer)
         }
+        this.timer = setTimeout(() => {
+                    //$refs['A']是一个数组，不是dom。这个数组的第一个才是dom
+            const touchY = e.touches[0].clientY -this.startY - 84,
+                  index = Math.floor(touchY/22)
+            if(index >= 0 && index < this.letters.length){
+              //只能绑定在该组件上，
+              // this.$emit('change',this.letters[index])
+              //因为这里出发的事件和上面的change一样功能，所以两次都是一样向外触发change事件
+              this.$emit('change',this.letters[index])
+            }   
+          },16)
       }
     },
     handleTouchEnd (){

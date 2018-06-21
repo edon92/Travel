@@ -1,7 +1,7 @@
 <template>
   <div>
     <city-header></city-header>
-    <city-search></city-search>
+    <city-search :cities="this.cities"></city-search>
     <city-list 
       :cities="this.cities" 
       :hotCities="this.hotCities" 
@@ -36,7 +36,7 @@ export default {
       cities: {},
       hotCities: [],
       letter: '',
-      touchStatus: false
+      touchStatus: false,
     }
   },
   methods:{
