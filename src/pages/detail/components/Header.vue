@@ -30,16 +30,20 @@ export default {
   methods: {
     handleScroll () {
       const top = document.documentElement.scrollTop
+      console.log(123)
       if(top > 60){
         this.opacityStyle.opacity = top/140
         this.showAbs = false
       } else {
-        this.showAbs = true
+        this.showAbs = true 
       }
     }
   },
   activated () {
     window.addEventListener('scroll',this.handleScroll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll',this.handleScroll)
   }
 
 }
@@ -48,6 +52,7 @@ export default {
 <style lang="stylus" scoped>
 @import '~styles/varible.styl'
   .header-abs
+    z-index: 2
     position: absolute
     text-align: center
     top: .1rem
@@ -62,6 +67,7 @@ export default {
       font-size: .3rem
       font-weight: bold
   .header-fixed
+    z-index: 2
     position: fixed
     left: 0
     top: 0
